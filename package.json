@@ -4,6 +4,10 @@
     "description": "Language support for Drools files (.drl)",
     "version": "1.0.0",
     "publisher": "kropptrevor",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/kropptrevor/vscode-drools"
+    },
     "engines": {
         "vscode": "^1.16.0"
     },
