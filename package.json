@@ -25,7 +25,7 @@
         "grammars": [{
             "language": "drools",
             "scopeName": "source.drools",
-            "path": "./syntaxes/Drools.tmLanguage"
+            "path": "./syntaxes/Drools.tmLanguage.json"
         }]
     }
 }
