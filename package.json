@@ -3,29 +3,36 @@
     "displayName": "Drools",
     "description": "Language support for Drools files (.drl)",
     "version": "1.0.0",
-    "publisher": "jim-moody",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jim-moody/vscode-drools"
-    },
+    "publisher": "kropptrevor",
     "engines": {
         "vscode": "^1.16.0"
     },
     "categories": [
         "Programming Languages"
     ],
-    "icon": "images/icon.png",
     "contributes": {
-        "languages": [{
-            "id": "drools",
-            "aliases": ["Drools", "drools"],
-            "extensions": [".drl"],
-            "configuration": "./language-configuration.json"
-        }],
-        "grammars": [{
-            "language": "drools",
-            "scopeName": "source.drools",
-            "path": "./syntaxes/Drools.tmLanguage.json"
-        }]
+        "languages": [
+            {
+                "id": "drools",
+                "aliases": [
+                    "Drools",
+                    "drools"
+                ],
+                "extensions": [
+                    ".drl"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "drools",
+                "scopeName": "source.drools",
+                "path": "./syntaxes/Drools.json",
+                "embeddedLanguages": {
+                    "meta.embedded.block.java": "java"
+                }
+            }
+        ]
     }
 }
