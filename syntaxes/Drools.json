@@ -6,7 +6,7 @@
     "patterns": [
         {
             "comment": "Mathmatical operators",
-            "match": "[<|>|==|<=|>=|.|!=]",
+            "match": "[<|>|==|<=|>=|!=]",
             "name": "keyword.operator.source.drools"
         },
         {
