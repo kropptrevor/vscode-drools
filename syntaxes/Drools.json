@@ -6,7 +6,27 @@
     "patterns": [
         {
             "comment": "Mathmatical operators",
-            "match": "[<|>|==|<=|>=|!=]",
+            "match": "(<|>|==|<=|>=|!=)",
+            "name": "keyword.operator.source.drools"
+        },
+        {
+            "comment": "Boolean operators",
+            "match": "(&&|\\|\\|)",
+            "name": "keyword.operator.source.drools"
+        },
+        {
+            "comment": "Temporal operators",
+            "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
+            "name": "keyword.operator.source.drools"
+        },
+        {
+            "comment": "Other binary operators",
+            "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin)\\b",
+            "name": "keyword.operator.source.drools"
+        },
+        {
+            "comment": "Java operators",
+            "match": "(\\*|\\+|-|>>|>>>|<<|instanceof|&|\\^|\\|)",
             "name": "keyword.operator.source.drools"
         },
         {
