@@ -68,7 +68,7 @@
         },
         {
             "comment": "Numbers",
-            "match": "([0-9]+(\\.)?[0-9]*)",
+            "match": "\\b([0-9]+(\\.)?[0-9]*)\\b",
             "name": "constant.numeric.source.drools"
         }
     ],
