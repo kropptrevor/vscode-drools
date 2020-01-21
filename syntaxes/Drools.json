@@ -20,6 +20,11 @@
             "name": "keyword.operator.source.drools"
         },
         {
+            "comment": "Other unary operators",
+            "match": "#[a-zA-Z$_][\\w$]*",
+            "name": "keyword.operator.source.drools"
+        },
+        {
             "comment": "Other binary operators",
             "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin)\\b",
             "name": "keyword.operator.source.drools"
