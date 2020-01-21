@@ -26,12 +26,12 @@
         },
         {
             "comment": "Other binary operators",
-            "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin)\\b",
+            "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
             "name": "keyword.operator.source.drools"
         },
         {
             "comment": "Java operators",
-            "match": "(\\*|\\+|-|>>|>>>|<<|instanceof|&|\\^|\\|)",
+            "match": "(\\*|\\+|-|>>|>>>|<<|instanceof|&|\\^|\\||\\?|:)",
             "name": "keyword.operator.source.drools"
         },
         {
