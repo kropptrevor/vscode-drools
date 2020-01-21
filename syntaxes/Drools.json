@@ -56,6 +56,22 @@
             ]
         },
         {
+            "comment": "Drools function body java",
+            "begin": "^\\s*(function)\\b",
+            "end": "\\n",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.source.drools"
+                }
+            },
+            "contentName": "meta.embedded.block.java",
+            "patterns": [
+                {
+                    "include": "source.java"
+                }
+            ]
+        },
+        {
             "comment": "Drools soft keywords",
             "match": "\\b(lock-on-active|date-effective|date-expires|no-loop|auto-focus|activation-group|agenda-group|ruleflow-group|entry-point|duration|package|import|dialect|salience|enabled|attributes|rule|extends|when|then|template|query|declare|function|global|eval|not|in|or|and|exists|forall|accumulate|collect|from|end|over|calendars|init|action|reverse|result|new)\\b",
             "name": "keyword.control.source.drools"
