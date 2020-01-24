@@ -25,22 +25,29 @@
                     "name": "punctuation.terminator.java"
                 }
             },
+            "name": "meta.package.java",
             "patterns": [
                 {
                     "include": "#packageClassName"
-                },
-                {
-                    "include": "#packageDots"
                 }
             ]
         },
         "packageClassName": {
-            "match": "([a-zA-Z_$][\\w$]*)+",
-            "name": "storage.modifier.package.java"
-        },
-        "packageDots": {
-            "match": "(?<=[\\w$])(\\.)(?=[a-zA-Z_$])",
-            "name": "storage.modifier.package.java punctuation.separator.java"
+            "begin": "(?<=package\\s|[\\w$]\\.)([a-zA-Z_$][\\w$]*)+(\\.)?",
+            "end": "(?=[^\\w$])",
+            "beginCaptures": {
+                "0": {
+                    "name": "storage.modifier.package.java"
+                },
+                "2": {
+                    "name": "punctuation.separator.java"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#packageClassName"
+                }
+            ]
         },
         "import": {
             "begin": "^\\s*import(\\s*function)?\\b",
@@ -55,6 +62,7 @@
                     "name": "punctuation.terminator.java"
                 }
             },
+            "name": "meta.import.java",
             "patterns": [
                 {
                     "include": "#importClassName"
@@ -65,12 +73,24 @@
             ]
         },
         "importClassName": {
-            "match": "(?<=(?:import\\s|function\\s|[\\w$]\\.))(([a-zA-Z_$][\\w$]*)+|\\*)",
-            "name": "storage.modifier.import.java"
-        },
-        "importDots": {
-            "match": "(?<=[\\w$])(\\.)(?=[a-zA-Z_$*])",
-            "name": "storage.modifier.import.java punctuation.separator.java"
+            "begin": "(?<=import\\s|function\\s|[\\w$]\\.)([a-zA-Z_$][\\w$]*|\\*)+(\\.)?(\\*)?",
+            "end": "(?=[^\\w$*])",
+            "beginCaptures": {
+                "0": {
+                    "name": "storage.modifier.import.java"
+                },
+                "2": {
+                    "name": "punctuation.separator.java"
+                },
+                "3": {
+                    "name": "variable.language.wildcard.java"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#importClassName"
+                }
+            ]
         }
     },
     "scopeName": "source.drools",
