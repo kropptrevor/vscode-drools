@@ -4,7 +4,75 @@
     ],
     "name": "Drools",
     "patterns": [
+        {
+            "include": "#package"
+        },
+        {
+            "include": "#import"
+        }
     ],
+    "repository": {
+        "package": {
+            "begin": "^\\s*package\\b",
+            "end": ";",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.other.package.java"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.terminator.java"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#packageClassName"
+                },
+                {
+                    "include": "#packageDots"
+                }
+            ]
+        },
+        "packageClassName": {
+            "match": "([a-zA-Z_$][\\w$]*)+",
+            "name": "storage.modifier.package.java"
+        },
+        "packageDots": {
+            "match": "(?<=[\\w$])(\\.)(?=[a-zA-Z_$])",
+            "name": "storage.modifier.package.java punctuation.separator.java"
+        },
+        "import": {
+            "begin": "^\\s*import(\\s*function)?\\b",
+            "end": ";",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.other.import.java"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.terminator.java"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#importClassName"
+                },
+                {
+                    "include": "#importDots"
+                }
+            ]
+        },
+        "importClassName": {
+            "match": "(?<=(?:import\\s|function\\s|[\\w$]\\.))(([a-zA-Z_$][\\w$]*)+|\\*)",
+            "name": "storage.modifier.import.java"
+        },
+        "importDots": {
+            "match": "(?<=[\\w$])(\\.)(?=[a-zA-Z_$*])",
+            "name": "storage.modifier.import.java punctuation.separator.java"
+        }
+    },
     "scopeName": "source.drools",
     "uuid": "a98fc7cc-15d1-401e-bb85-e72714276cdb"
 }
