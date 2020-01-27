@@ -9,9 +9,19 @@
         },
         {
             "include": "#import"
+        },
+        {
+            "include": "#ruleBeginning"
+        },
+        {
+            "include": "#strings"
         }
     ],
     "repository": {
+        "strings": {
+            "match": "(\"([^\"]|\"\")*\")",
+            "name": "string.quoted.double.drools"
+        },
         "package": {
             "begin": "^\\s*package\\b",
             "end": ";",
@@ -89,6 +99,101 @@
             "patterns": [
                 {
                     "include": "#importClassName"
+                }
+            ]
+        },
+        "ruleBeginning": {
+            "begin": "^\\s*rule\\s+",
+            "end": "(?=\\bwhen\\b)",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.other.rule.drools"
+                }
+            },
+            "name": "meta.rule.drools",
+            "patterns": [
+                {
+                    "include": "#ruleName"
+                },
+                {
+                    "include": "#ruleAttributes"
+                }
+            ]
+        },
+        "ruleName": {
+            "begin": "(?<=rule\\s)\\s*(\"(?:[^\"]|\\\")*\")",
+            "end": "$",
+            "beginCaptures": {
+                "1": {
+                    "name": "string.quoted.double.drools"
+                }
+            }
+        },
+        "ruleAttributes": {
+            "patterns": [
+                {
+                    "match": "\\b(attributes)\\s*:",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.attribute.drools"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(duration|salience)\\s+(-?\\d+)\\s*(,)?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.attribute.drools"
+                        },
+                        "2": {
+                            "name": "constant.numeric.drools"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.delimiter.drools"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(agenda-group|activation-group|date-effective|date-expires|dialect|rulefow-group)\\s+(\"(?:[^\"]|\\\")*\")\\s*(,)?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.attribute.drools"
+                        },
+                        "2": {
+                            "name": "string.quoted.double.drools"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.delimiter.drools"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(enabled)(?:\\s+(true|false))\\s*(,)?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.attribute.drools"
+                        },
+                        "2": {
+                            "name": "constant.language.drools"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.delimiter.drools"
+                        }
+                    }
+                },
+                {
+                    "match": "\\b(auto-focus|lock-on-active|no-loop)(?:\\s+(true|false))?\\s*(,)?",
+                    "captures": {
+                        "1": {
+                            "name": "keyword.other.attribute.drools"
+                        },
+                        "2": {
+                            "name": "constant.language.drools"
+                        },
+                        "3": {
+                            "name": "punctuation.separator.delimiter.drools"
+                        }
+                    }
                 }
             ]
         }
