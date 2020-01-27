@@ -140,7 +140,7 @@
                     }
                 },
                 {
-                    "match": "\\b(duration|salience)\\s+(-?\\d+)\\s*(,)?",
+                    "match": "\\b(duration|salience)\\s+(-?\\d+)(?:\\b|\\s*(,))",
                     "captures": {
                         "1": {
                             "name": "keyword.other.attribute.drools"
@@ -168,7 +168,7 @@
                     }
                 },
                 {
-                    "match": "\\b(enabled)(?:\\s+(true|false))\\s*(,)?",
+                    "match": "\\b(enabled)(?:\\s+(true|false))(?:\\b|\\s*(,))",
                     "captures": {
                         "1": {
                             "name": "keyword.other.attribute.drools"
@@ -182,7 +182,7 @@
                     }
                 },
                 {
-                    "match": "\\b(auto-focus|lock-on-active|no-loop)(?:\\s+(true|false))?\\s*(,)?",
+                    "match": "\\b(auto-focus|lock-on-active|no-loop)(?:\\s+(true|false))?(?:\\b|\\s*(,))",
                     "captures": {
                         "1": {
                             "name": "keyword.other.attribute.drools"
