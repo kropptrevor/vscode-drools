@@ -24,7 +24,7 @@
         },
         "package": {
             "begin": "^\\s*package\\b",
-            "end": ";",
+            "end": ";|$",
             "beginCaptures": {
                 "0": {
                     "name": "keyword.other.package.java"
@@ -61,7 +61,7 @@
         },
         "import": {
             "begin": "^\\s*import(\\s*function)?\\b",
-            "end": ";",
+            "end": ";|$",
             "beginCaptures": {
                 "0": {
                     "name": "keyword.other.import.java"
