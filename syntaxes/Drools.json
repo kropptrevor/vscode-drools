@@ -14,6 +14,12 @@
             "include": "#ruleBeginning"
         },
         {
+            "include": "#ruleLHS"
+        },
+        {
+            "include": "#ruleRHS"
+        },
+        {
             "include": "#strings"
         }
     ],
@@ -110,7 +116,7 @@
                     "name": "keyword.other.rule.drools"
                 }
             },
-            "name": "meta.rule.drools",
+            "name": "meta.rule.name.drools",
             "patterns": [
                 {
                     "include": "#ruleName"
@@ -196,6 +202,26 @@
                     }
                 }
             ]
+        },
+        "ruleLHS": {
+            "begin": "\\bwhen\\b",
+            "end": "(?=\\bthen\\b)",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.other.rule.drools"
+                }
+            },
+            "name": "meta.rule.lhs.drools"
+        },
+        "ruleRHS": {
+            "begin": "\\bthen\\b",
+            "end": "\\bend\\b",
+            "captures": {
+                "0": {
+                    "name": "keyword.other.rule.drools"
+                }
+            },
+            "name": "meta.rule.rhs.drools"
         }
     },
     "scopeName": "source.drools",
