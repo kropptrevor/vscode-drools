@@ -33,15 +33,15 @@
             "end": ";|$",
             "beginCaptures": {
                 "0": {
-                    "name": "keyword.other.package.java"
+                    "name": "keyword.control.package.drools"
                 }
             },
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.terminator.java"
+                    "name": "punctuation.terminator.drools"
                 }
             },
-            "name": "meta.package.java",
+            "name": "meta.package.drools",
             "patterns": [
                 {
                     "include": "#packageClassName"
@@ -56,7 +56,7 @@
                     "name": "storage.modifier.package.java"
                 },
                 "2": {
-                    "name": "punctuation.separator.java"
+                    "name": "punctuation.separator.drools"
                 }
             },
             "patterns": [
@@ -70,15 +70,15 @@
             "end": ";|$",
             "beginCaptures": {
                 "0": {
-                    "name": "keyword.other.import.java"
+                    "name": "keyword.control.import.drools"
                 }
             },
             "endCaptures": {
                 "0": {
-                    "name": "punctuation.terminator.java"
+                    "name": "punctuation.terminator.drools"
                 }
             },
-            "name": "meta.import.java",
+            "name": "meta.import.drools",
             "patterns": [
                 {
                     "include": "#importClassName"
@@ -96,10 +96,10 @@
                     "name": "storage.modifier.import.java"
                 },
                 "2": {
-                    "name": "punctuation.separator.java"
+                    "name": "punctuation.separator.drools"
                 },
                 "3": {
-                    "name": "variable.language.wildcard.java"
+                    "name": "variable.language.wildcard.drools"
                 }
             },
             "patterns": [
@@ -110,10 +110,10 @@
         },
         "ruleBeginning": {
             "begin": "^\\s*rule\\s+",
-            "end": "(?=\\bwhen\\b)",
+            "end": "(?=\\bwhen\\b|\\bthen\\b)",
             "beginCaptures": {
                 "0": {
-                    "name": "keyword.other.rule.drools"
+                    "name": "keyword.control.rule.drools"
                 }
             },
             "name": "meta.rule.name.drools",
@@ -141,7 +141,7 @@
                     "match": "\\b(attributes)\\s*:",
                     "captures": {
                         "1": {
-                            "name": "keyword.other.attribute.drools"
+                            "name": "keyword.control.attribute.drools"
                         }
                     }
                 },
@@ -149,7 +149,7 @@
                     "match": "\\b(duration|salience)\\s+(-?\\d+)(?:\\b|\\s*(,))",
                     "captures": {
                         "1": {
-                            "name": "keyword.other.attribute.drools"
+                            "name": "keyword.control.attribute.drools"
                         },
                         "2": {
                             "name": "constant.numeric.drools"
@@ -163,7 +163,7 @@
                     "match": "\\b(agenda-group|activation-group|date-effective|date-expires|dialect|rulefow-group)\\s+(\"(?:[^\"]|\\\")*\")\\s*(,)?",
                     "captures": {
                         "1": {
-                            "name": "keyword.other.attribute.drools"
+                            "name": "keyword.control.attribute.drools"
                         },
                         "2": {
                             "name": "string.quoted.double.drools"
@@ -177,7 +177,7 @@
                     "match": "\\b(enabled)(?:\\s+(true|false))(?:\\b|\\s*(,))",
                     "captures": {
                         "1": {
-                            "name": "keyword.other.attribute.drools"
+                            "name": "keyword.control.attribute.drools"
                         },
                         "2": {
                             "name": "constant.language.drools"
@@ -191,7 +191,7 @@
                     "match": "\\b(auto-focus|lock-on-active|no-loop)(?:\\s+(true|false))?(?:\\b|\\s*(,))",
                     "captures": {
                         "1": {
-                            "name": "keyword.other.attribute.drools"
+                            "name": "keyword.control.attribute.drools"
                         },
                         "2": {
                             "name": "constant.language.drools"
@@ -204,21 +204,93 @@
             ]
         },
         "ruleLHS": {
-            "begin": "\\bwhen\\b",
+            "begin": "\\b(when)(\\s*:|\\b)",
             "end": "(?=\\bthen\\b)",
             "beginCaptures": {
-                "0": {
-                    "name": "keyword.other.rule.drools"
+                "1": {
+                    "name": "keyword.control.rule.drools"
+                },
+                "2": {
+                    "name": "punctuation.definition.drools"
                 }
             },
-            "name": "meta.rule.lhs.drools"
+            "name": "meta.rule.lhs.drools",
+            "patterns": [
+                {
+                    "include": "#lhsKeywords"
+                },
+                {
+                    "include": "#lhsIdent"
+                },
+                {
+                    "include": "#strings"
+                },
+                {
+                    "match": "(==|<=|>=|<|>|!=)",
+                    "name": "keyword.operator.drools"
+                },
+                {
+                    "match": "(&&|\\|\\|)",
+                    "name": "keyword.operator.drools"
+                },
+                {
+                    "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
+                    "name": "keyword.operator.drools"
+                },
+                {
+                    "match": "#[a-zA-Z$_][\\w$]*",
+                    "name": "keyword.operator.drools"
+                },
+                {
+                    "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
+                    "name": "keyword.operator.drools"
+                },
+                {
+                    "match": "(\\*|\\+|-|>>|>>>|<<|instanceof|&|\\^|\\||\\?)",
+                    "name": "keyword.operator.drools"
+                },
+                {
+                    "match": "\\b(true|false|null)\\b",
+                    "name": "constant.language.drools"
+                },
+                {
+                    "match": ":",
+                    "name": "punctuation.definition.drools"
+                },
+                {
+                    "match": "([a-zA-Z_$][\\w$]*)\\s*\\(",
+                    "captures": {
+                        "1": {
+                            "name": "entity.name.function.drools"
+                        }
+                    }
+                }
+            ]
+        },
+        "lhsKeywords": {
+            "match": "\\b(exists|not|eval|forall|collect|accumulate|from)\\b",
+            "name": "keyword.control.lhs.drools"
+        },
+        "lhsIdent": {
+            "match": "([a-zA-Z_$][\\w$]*)\\s*(:)\\s*(?:([A-Z][\\w$]*)\\s*\\()?",
+            "captures": {
+                "1": {
+                    "name": "variable.other.drools"
+                },
+                "2": {
+                    "name": "punctuation.definition.drools"
+                },
+                "3": {
+                    "name": "storage.type.java"
+                }
+            }
         },
         "ruleRHS": {
             "begin": "\\bthen\\b",
             "end": "\\bend\\b",
             "captures": {
                 "0": {
-                    "name": "keyword.other.rule.drools"
+                    "name": "keyword.control.rule.drools"
                 }
             },
             "name": "meta.rule.rhs.drools"
