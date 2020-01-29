@@ -288,6 +288,9 @@
                     "include": "#rhsInsert"
                 },
                 {
+                    "include": "#rhsDelete"
+                },
+                {
                     "include": "source.java"
                 }
             ]
@@ -372,6 +375,20 @@
                     ]
                 },
                 "5": {
+                    "name": "punctuation.terminator.drools"
+                }
+            }
+        },
+        "rhsDelete": {
+            "match": "\\b(delete)\\s*\\(\\s*([a-zA-Z_$][\\w$]*)\\s*\\)\\s*(;)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.rhs.drools"
+                },
+                "2": {
+                    "name": "variable.other.drools"
+                },
+                "3": {
                     "name": "punctuation.terminator.drools"
                 }
             }
