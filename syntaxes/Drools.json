@@ -217,13 +217,13 @@
             "name": "meta.rule.lhs.drools",
             "patterns": [
                 {
+                    "include": "#strings"
+                },
+                {
                     "include": "#lhsKeywords"
                 },
                 {
                     "include": "#lhsIdent"
-                },
-                {
-                    "include": "#strings"
                 },
                 {
                     "match": "(==|<=|>=|<|>|!=)",
@@ -286,14 +286,23 @@
             }
         },
         "ruleRHS": {
-            "begin": "\\bthen\\b",
-            "end": "\\bend\\b",
+            "begin": "\\b(then)\\b",
+            "end": "\\b(end)(?:\\s*(;)?|\\b)",
             "captures": {
-                "0": {
+                "1": {
                     "name": "keyword.control.rule.drools"
+                },
+                "2": {
+                    "name": "punctuation.terminator.drools"
                 }
             },
-            "name": "meta.rule.rhs.drools"
+            "name": "meta.rule.rhs.drools",
+            "contentName": "meta.embedded.block.java",
+            "patterns": [
+                {
+                    "include": "source.java"
+                }
+            ]
         }
     },
     "scopeName": "source.drools",
