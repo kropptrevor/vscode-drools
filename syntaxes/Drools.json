@@ -226,14 +226,6 @@
                     "include": "#lhsIdent"
                 },
                 {
-                    "match": "(==|<=|>=|<|>|!=)",
-                    "name": "keyword.operator.drools"
-                },
-                {
-                    "match": "(&&|\\|\\|)",
-                    "name": "keyword.operator.drools"
-                },
-                {
                     "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
                     "name": "keyword.operator.drools"
                 },
@@ -246,24 +238,11 @@
                     "name": "keyword.operator.drools"
                 },
                 {
-                    "match": "(\\*|\\+|-|>>|>>>|<<|instanceof|&|\\^|\\||\\?)",
-                    "name": "keyword.operator.drools"
-                },
-                {
-                    "match": "\\b(true|false|null)\\b",
-                    "name": "constant.language.drools"
-                },
-                {
                     "match": ":",
                     "name": "punctuation.definition.drools"
                 },
                 {
-                    "match": "([a-zA-Z_$][\\w$]*)\\s*\\(",
-                    "captures": {
-                        "1": {
-                            "name": "entity.name.function.drools"
-                        }
-                    }
+                    "include": "source.java"
                 }
             ]
         },
@@ -275,7 +254,7 @@
             "match": "([a-zA-Z_$][\\w$]*)\\s*(:)\\s*(?:([A-Z][\\w$]*)\\s*\\()?",
             "captures": {
                 "1": {
-                    "name": "variable.other.drools"
+                    "name": "variable.other.definition.drools"
                 },
                 "2": {
                     "name": "punctuation.definition.drools"
@@ -300,7 +279,53 @@
             "contentName": "meta.embedded.block.java",
             "patterns": [
                 {
+                    "begin": "\\b(modify)(?=\\s*\\(\\s*[a-zA-Z_$][\\w$]*\\s*\\)\\s*\\{)",
+                    "end": "\\}",
+                    "beginCaptures": {
+                        "1": {
+                            "name": "keyword.control.rule.drools"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "match": "(?<=modify)\\s*\\(\\s*([a-zA-Z_$][\\w$]*)\\s*\\)\\s*\\{",
+                            "captures": {
+                                "1": {
+                                    "name": "variable.other.drools"
+                                }
+                            }
+                        },
+                        {
+                            "include": "#modifyExpression"
+                        }
+                    ]
+                },
+                {
                     "include": "source.java"
+                }
+            ]
+        },
+        "modifyExpression": {
+            "begin": "\\s*(set[A-Z][\\w_$]*)\\s*\\(([^\\)]*)\\)(,)?",
+            "end": "(?=\\})",
+            "beginCaptures": {
+                "1": {
+                    "name": "entity.name.function.drools"
+                },
+                "2": {
+                    "patterns": [
+                        {
+                            "include": "source.java"
+                        }
+                    ]
+                },
+                "3": {
+                    "name": "punctuation.separator.delimiter.drools"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#modifyExpression"
                 }
             ]
         }
