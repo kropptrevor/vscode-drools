@@ -279,29 +279,38 @@
             "contentName": "meta.embedded.block.java",
             "patterns": [
                 {
-                    "begin": "\\b(modify)(?=\\s*\\(\\s*[a-zA-Z_$][\\w$]*\\s*\\)\\s*\\{)",
-                    "end": "\\}",
-                    "beginCaptures": {
-                        "1": {
-                            "name": "keyword.control.rule.drools"
-                        }
-                    },
-                    "patterns": [
-                        {
-                            "match": "(?<=modify)\\s*\\(\\s*([a-zA-Z_$][\\w$]*)\\s*\\)\\s*\\{",
-                            "captures": {
-                                "1": {
-                                    "name": "variable.other.drools"
-                                }
-                            }
-                        },
-                        {
-                            "include": "#modifyExpression"
-                        }
-                    ]
+                    "include": "#rhsModify"
+                },
+                {
+                    "include": "#rhsUpdate"
+                },
+                {
+                    "include": "#rhsInsert"
                 },
                 {
                     "include": "source.java"
+                }
+            ]
+        },
+        "rhsModify": {
+            "begin": "\\b(modify)(?=\\s*\\(\\s*[a-zA-Z_$][\\w$]*\\s*\\)\\s*\\{)",
+            "end": "\\}",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.rhs.drools"
+                }
+            },
+            "patterns": [
+                {
+                    "match": "(?<=modify)\\s*\\(\\s*([a-zA-Z_$][\\w$]*)\\s*\\)\\s*\\{",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.drools"
+                        }
+                    }
+                },
+                {
+                    "include": "#modifyExpression"
                 }
             ]
         },
@@ -328,6 +337,44 @@
                     "include": "#modifyExpression"
                 }
             ]
+        },
+        "rhsUpdate": {
+            "match": "\\b(update)\\s*\\((\\s*[a-zA-Z_$][\\w$]*\\s*)\\)\\s*(;)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.rhs.drools"
+                },
+                "2": {
+                    "name": "variable.other.drools"
+                },
+                "3": {
+                    "name": "punctuation.terminator.drools"
+                }
+            }
+        },
+        "rhsInsert": {
+            "match": "\\b(insert(?:Logical)?)\\s*\\(\\s*(new)\\s+([a-zA-Z_$][\\w$]*)\\s*\\((.*)\\)\\s*\\)\\s*(;)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.rhs.drools"
+                },
+                "2": {
+                    "name": "keyword.control.new.java"
+                },
+                "3": {
+                    "name": "entity.name.function.java"
+                },
+                "4": {
+                    "patterns": [
+                        {
+                            "include": "source.java"
+                        }
+                    ]
+                },
+                "5": {
+                    "name": "punctuation.terminator.drools"
+                }
+            }
         }
     },
     "scopeName": "source.drools",
