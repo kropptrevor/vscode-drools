@@ -310,9 +310,14 @@
                     "name": "keyword.control.rhs.drools"
                 }
             },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.bracket.curly.drools"
+                }
+            },
             "patterns": [
                 {
-                    "match": "(?<=modify)\\s*(\\()\\s*([a-zA-Z_$][\\w$]*)\\s*(\\))\\s*\\{",
+                    "match": "(?<=modify)\\s*(\\()\\s*([a-zA-Z_$][\\w$]*)\\s*(\\))\\s*(\\{)",
                     "captures": {
                         "1": {
                             "name": "punctuation.bracket.round.drools"
@@ -322,6 +327,9 @@
                         },
                         "3": {
                             "name": "punctuation.bracket.round.drools"
+                        },
+                        "4": {
+                            "name": "punctuation.bracket.curly.drools"
                         }
                     }
                 },
