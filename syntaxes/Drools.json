@@ -242,6 +242,10 @@
                     "name": "punctuation.definition.drools"
                 },
                 {
+                    "match": "\\(|\\)",
+                    "name": "punctuation.bracket.round.drools"
+                },
+                {
                     "include": "source.java"
                 }
             ]
@@ -251,7 +255,7 @@
             "name": "keyword.control.lhs.drools"
         },
         "lhsIdent": {
-            "match": "([a-zA-Z_$][\\w$]*)\\s*(:)\\s*(?:([A-Z][\\w$]*)\\s*\\()?",
+            "match": "([a-zA-Z_$][\\w$]*)\\s*(:)\\s*(?:([A-Z][\\w$]*)\\s*(\\())?",
             "captures": {
                 "1": {
                     "name": "variable.other.definition.drools"
@@ -261,6 +265,9 @@
                 },
                 "3": {
                     "name": "storage.type.java"
+                },
+                "4": {
+                    "name": "punctuation.bracket.round.drools"
                 }
             }
         },
@@ -305,10 +312,16 @@
             },
             "patterns": [
                 {
-                    "match": "(?<=modify)\\s*\\(\\s*([a-zA-Z_$][\\w$]*)\\s*\\)\\s*\\{",
+                    "match": "(?<=modify)\\s*(\\()\\s*([a-zA-Z_$][\\w$]*)\\s*(\\))\\s*\\{",
                     "captures": {
                         "1": {
+                            "name": "punctuation.bracket.round.drools"
+                        },
+                        "2": {
                             "name": "variable.other.drools"
+                        },
+                        "3": {
+                            "name": "punctuation.bracket.round.drools"
                         }
                     }
                 },
@@ -318,20 +331,26 @@
             ]
         },
         "modifyExpression": {
-            "begin": "\\s*(set[A-Z][\\w_$]*)\\s*\\(([^\\)]*)\\)(,)?",
+            "begin": "\\s*(set[A-Z][\\w_$]*)\\s*(\\()([^\\)]*)(\\))(,)?",
             "end": "(?=\\})",
             "beginCaptures": {
                 "1": {
                     "name": "entity.name.function.drools"
                 },
                 "2": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "3": {
                     "patterns": [
                         {
                             "include": "source.java"
                         }
                     ]
                 },
-                "3": {
+                "4": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "5": {
                     "name": "punctuation.separator.delimiter.drools"
                 }
             },
@@ -342,53 +361,77 @@
             ]
         },
         "rhsUpdate": {
-            "match": "\\b(update)\\s*\\((\\s*[a-zA-Z_$][\\w$]*\\s*)\\)\\s*(;)",
+            "match": "\\b(update)\\s*(\\()(\\s*[a-zA-Z_$][\\w$]*\\s*)(\\))\\s*(;)",
             "captures": {
                 "1": {
                     "name": "keyword.control.rhs.drools"
                 },
                 "2": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "3": {
                     "name": "variable.other.drools"
                 },
-                "3": {
-                    "name": "punctuation.terminator.drools"
-                }
-            }
-        },
-        "rhsInsert": {
-            "match": "\\b(insert(?:Logical)?)\\s*\\(\\s*(new)\\s+([a-zA-Z_$][\\w$]*)\\s*\\((.*)\\)\\s*\\)\\s*(;)",
-            "captures": {
-                "1": {
-                    "name": "keyword.control.rhs.drools"
-                },
-                "2": {
-                    "name": "keyword.control.new.java"
-                },
-                "3": {
-                    "name": "entity.name.function.java"
-                },
                 "4": {
-                    "patterns": [
-                        {
-                            "include": "source.java"
-                        }
-                    ]
+                    "name": "punctuation.bracket.round.drools"
                 },
                 "5": {
                     "name": "punctuation.terminator.drools"
                 }
             }
         },
-        "rhsDelete": {
-            "match": "\\b(delete)\\s*\\(\\s*([a-zA-Z_$][\\w$]*)\\s*\\)\\s*(;)",
+        "rhsInsert": {
+            "match": "\\b(insert(?:Logical)?)\\s*(\\()\\s*(new)\\s+([a-zA-Z_$][\\w$]*)\\s*(\\()(.*)(\\))\\s*(\\))\\s*(;)",
             "captures": {
                 "1": {
                     "name": "keyword.control.rhs.drools"
                 },
                 "2": {
-                    "name": "variable.other.drools"
+                    "name": "punctuation.bracket.round.drools"
                 },
                 "3": {
+                    "name": "keyword.control.new.java"
+                },
+                "4": {
+                    "name": "entity.name.function.java"
+                },
+                "5": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "6": {
+                    "patterns": [
+                        {
+                            "include": "source.java"
+                        }
+                    ]
+                },
+                "7": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "8": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "9": {
+                    "name": "punctuation.terminator.drools"
+                }
+            }
+        },
+        "rhsDelete": {
+            "match": "\\b(delete)\\s*(\\()\\s*([a-zA-Z_$][\\w$]*)\\s*(\\))\\s*(;)",
+            "captures": {
+                "1": {
+                    "name": "keyword.control.rhs.drools"
+                },
+                "2": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "3": {
+                    "name": "variable.other.drools"
+                },
+                "4": {
+                    "name": "punctuation.bracket.round.drools"
+                },
+                "5": {
                     "name": "punctuation.terminator.drools"
                 }
             }
