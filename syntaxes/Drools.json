@@ -217,25 +217,25 @@
             "name": "meta.rule.lhs.drools",
             "patterns": [
                 {
-                    "include": "#strings"
+                    "include": "#lhsKeywords"
                 },
                 {
-                    "include": "#lhsKeywords"
+                    "include": "#lhsObject"
                 },
                 {
                     "include": "#lhsIdent"
                 },
                 {
                     "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
-                    "name": "keyword.operator.drools"
+                    "name": "keyword.control.rule.drools"
                 },
                 {
                     "match": "#[a-zA-Z$_][\\w$]*",
-                    "name": "keyword.operator.drools"
+                    "name": "keyword.control.rule.drools"
                 },
                 {
                     "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
-                    "name": "keyword.operator.drools"
+                    "name": "keyword.control.rule.drools"
                 },
                 {
                     "match": ":",
@@ -246,6 +246,12 @@
                     "name": "punctuation.bracket.round.drools"
                 },
                 {
+                    "include": "#oopExpr"
+                },
+                {
+                    "include": "#oopConstraint"
+                },
+                {
                     "include": "source.java"
                 }
             ]
@@ -254,8 +260,8 @@
             "match": "\\b(exists|not|eval|forall|collect|accumulate|from)\\b",
             "name": "keyword.control.lhs.drools"
         },
-        "lhsIdent": {
-            "match": "([a-zA-Z_$][\\w$]*)\\s*(:)\\s*(?:([A-Z][\\w$]*)\\s*(\\())?",
+        "lhsObject": {
+            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:))?\\s*([A-Z][\\w$]*)\\s*(\\()",
             "captures": {
                 "1": {
                     "name": "variable.other.definition.drools"
@@ -268,6 +274,42 @@
                 },
                 "4": {
                     "name": "punctuation.bracket.round.drools"
+                }
+            }
+        },
+        "lhsIdent": {
+            "match": "([a-zA-Z_$][\\w$]*)\\s*(:)",
+            "captures": {
+                "1": {
+                    "name": "variable.other.definition.drools"
+                },
+                "2": {
+                    "name": "punctuation.definition.drools"
+                }
+            }
+        },
+        "oopExpr": {
+            "match": "((?:\\?/|/?\\.\\./|/)[a-zA-Z_$][\\w$]*)(#[a-zA-Z$_][\\w$]*)?(\\.)?",
+            "captures": {
+                "1": {
+                    "name": "string.regexp.path.drools"
+                },
+                "2": {
+                    "name": "storage.type.java"
+                },
+                "3": {
+                    "name": "string.regexp.path.drools"
+                }
+            }
+        },
+        "oopConstraint": {
+            "match": "(?:(?<=[\\w$])(\\[))|(\\])",
+            "captures": {
+                "1": {
+                    "name": "punctuation.bracket.square.drools"
+                },
+                "2": {
+                    "name": "punctuation.bracket.square.drools"
                 }
             }
         },
