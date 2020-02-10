@@ -257,7 +257,7 @@
             ]
         },
         "lhsKeywords": {
-            "match": "\\b(exists|not|eval|forall|collect|accumulate|from)\\b",
+            "match": "\\b(exists|not|eval|forall|collect|accumulate|from|and|or)\\b",
             "name": "keyword.control.lhs.drools"
         },
         "lhsObject": {
