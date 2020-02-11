@@ -11,6 +11,9 @@
             "include": "#import"
         },
         {
+            "include": "#query"
+        },
+        {
             "include": "#ruleBeginning"
         },
         {
@@ -105,6 +108,97 @@
             "patterns": [
                 {
                     "include": "#importClassName"
+                }
+            ]
+        },
+        "query": {
+            "begin": "^\\s*(query)\\s+([a-zA-Z_$][\\w$]*)\\s*(\\([^\\(\\)]*\\))?",
+            "end": "\\b(end)(?:\\s*(;)?|\\b)",
+            "name": "meta.query.block.drools",
+            "beginCaptures": {
+                "1": {
+                    "name": "keyword.control.query.drools"
+                },
+                "2": {
+                    "name": "entity.name.function.drools"
+                },
+                "3": {
+                    "patterns": [
+                        {
+                            "include": "#queryParen"
+                        }
+                    ]
+                }
+            },
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.control.query.drools"
+                },
+                "2": {
+                    "name": "punctuation.separator.drools"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#lhsKeywords"
+                },
+                {
+                    "include": "#lhsObject"
+                },
+                {
+                    "include": "#lhsIdent"
+                },
+                {
+                    "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
+                    "name": "keyword.control.rule.drools"
+                },
+                {
+                    "match": "#[a-zA-Z$_][\\w$]*",
+                    "name": "keyword.control.rule.drools"
+                },
+                {
+                    "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
+                    "name": "keyword.control.rule.drools"
+                },
+                {
+                    "match": "\\(|\\)",
+                    "name": "punctuation.bracket.round.drools"
+                },
+                {
+                    "include": "#oopExpr"
+                },
+                {
+                    "include": "#oopConstraint"
+                },
+                {
+                    "include": "source.java"
+                }
+            ]
+        },
+        "queryParen": {
+            "begin": "\\(",
+            "end": "\\)",
+            "captures": {
+                "0": {
+                    "name": "punctuation.bracket.round.drools"
+                }
+            },
+            "name": "meta.query.parameters.drools",
+            "patterns": [
+                {
+                    "match": "\\b([a-zA-Z_$][\\w$]*)\\s+([a-zA-Z_$][\\w$]*)\\b",
+                    "captures": {
+                        "1": {
+                            "name": "storage.type.java"
+                        },
+                        "2": {
+                            "name": "variable.other.definition.drools"
+                        }
+                    }
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.delimiter.drools"
                 }
             ]
         },
@@ -278,15 +372,27 @@
             }
         },
         "lhsIdent": {
-            "match": "([a-zA-Z_$][\\w$]*)\\s*(:=|:)",
-            "captures": {
-                "1": {
-                    "name": "variable.other.definition.drools"
+            "patterns": [
+                {
+                    "match": "(?<=[^a-zA-Z_$])([a-zA-Z_$][\\w$]*)\\s*(:=|:)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.definition.drools"
+                        },
+                        "2": {
+                            "name": "keyword.operator.assignment.drools"
+                        }
+                    }
                 },
-                "2": {
-                    "name": "keyword.operator.assignment.drools"
+                {
+                    "match": "(?<=\\(|,|;)\\s*([a-zA-Z_$][\\w$]*)\\s*(?=\\)|,|;)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.definition.drools"
+                        }
+                    }
                 }
-            }
+            ]
         },
         "oopExpr": {
             "match": "((?:\\?/|/?\\.\\./|/)[a-zA-Z_$][\\w$]*)(#[a-zA-Z$_][\\w$]*)?(\\.)?",
