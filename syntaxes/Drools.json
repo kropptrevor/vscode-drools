@@ -238,8 +238,8 @@
                     "name": "keyword.control.rule.drools"
                 },
                 {
-                    "match": ":",
-                    "name": "punctuation.definition.drools"
+                    "match": ":=|:",
+                    "name": "keyword.operator.assignment.drools"
                 },
                 {
                     "match": "\\(|\\)",
@@ -261,7 +261,7 @@
             "name": "keyword.control.lhs.drools"
         },
         "lhsObject": {
-            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:|:=))?\\s*([A-Z][\\w$]*)\\s*(\\()",
+            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:=|:))?\\s*([A-Z][\\w$]*)\\s*(\\()",
             "captures": {
                 "1": {
                     "name": "variable.other.definition.drools"
@@ -278,13 +278,13 @@
             }
         },
         "lhsIdent": {
-            "match": "([a-zA-Z_$][\\w$]*)\\s*(:)",
+            "match": "([a-zA-Z_$][\\w$]*)\\s*(:=|:)",
             "captures": {
                 "1": {
                     "name": "variable.other.definition.drools"
                 },
                 "2": {
-                    "name": "punctuation.definition.drools"
+                    "name": "keyword.operator.assignment.drools"
                 }
             }
         },
