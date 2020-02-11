@@ -261,13 +261,13 @@
             "name": "keyword.control.lhs.drools"
         },
         "lhsObject": {
-            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:))?\\s*([A-Z][\\w$]*)\\s*(\\()",
+            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:|:=))?\\s*([A-Z][\\w$]*)\\s*(\\()",
             "captures": {
                 "1": {
                     "name": "variable.other.definition.drools"
                 },
                 "2": {
-                    "name": "punctuation.definition.drools"
+                    "name": "keyword.operator.assignment.drools"
                 },
                 "3": {
                     "name": "storage.type.java"
