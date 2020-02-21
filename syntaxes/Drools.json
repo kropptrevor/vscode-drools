@@ -26,14 +26,10 @@
             "include": "#ruleRHS"
         },
         {
-            "include": "#strings"
+            "include": "#stringLiteral"
         }
     ],
     "repository": {
-        "strings": {
-            "match": "(\"([^\"]|\"\")*\")",
-            "name": "string.quoted.double.drools"
-        },
         "stringLiteral": {
             "begin": "\"",
             "end": "\"",
@@ -126,14 +122,12 @@
         },
         "function": {
             "begin": "^\\s*(function)\\b",
-            "donothing": "(\\s+[a-zA-Z_$][\\w$]*)?\\s+([a-zA-Z_$][\\w$]*)(?:\\s*(\\()([^\\(\\)]*)(\\))|\\b)",
             "end": "(?:^\\n|(?<=})\\n)",
             "beginCaptures": {
                 "1": {
                     "name": "keyword.control.source.drools"
                 }
             },
-            "notcontentName": "meta.embedded.block.java",
             "patterns": [
                 {
                     "begin": "(?<=[^\\w]function|^function)\\s*",
