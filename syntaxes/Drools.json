@@ -326,7 +326,7 @@
             ]
         },
         "ruleBeginning": {
-            "begin": "^\\s*rule\\s+",
+            "begin": "^\\s*rule\\s",
             "end": "(?=\\bwhen\\b|\\bthen\\b)",
             "beginCaptures": {
                 "0": {
@@ -344,13 +344,18 @@
             ]
         },
         "ruleName": {
-            "begin": "(?<=rule\\s)\\s*(\"(?:[^\"]|\\\")*\")",
-            "end": "$",
-            "beginCaptures": {
-                "1": {
-                    "name": "string.quoted.double.drools"
+            "begin": "(?<=rule\\s)",
+            "end": "(?<=\")|(?:(?<=\\w)(?=[^\\w]))",
+            "name": "test",
+            "patterns": [
+                {
+                    "include": "#stringLiteral"
+                },
+                {
+                    "match": "(?<=\\W|^)[a-zA-Z_$]\\w*(?=\\W)",
+                    "name": "storage.type.java"
                 }
-            }
+            ]
         },
         "ruleAttributes": {
             "patterns": [
