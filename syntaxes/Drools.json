@@ -34,6 +34,16 @@
             "match": "(\"([^\"]|\"\")*\")",
             "name": "string.quoted.double.drools"
         },
+        "stringLiteral": {
+            "begin": "\"",
+            "end": "\"",
+            "name": "string.quoted.double.drools",
+            "patterns": [
+                {
+                    "match": "\\\\[\\\\\"ntbr]"
+                }
+            ]
+        },
         "package": {
             "begin": "^\\s*package\\b",
             "end": ";|$",
@@ -220,93 +230,112 @@
             ]
         },
         "query": {
-            "begin": "^\\s*(query)\\s+([a-zA-Z_$][\\w$]*)\\s*(\\([^\\(\\)]*\\))?",
-            "end": "\\b(end)(?:\\s*(;)?|\\b)",
-            "name": "meta.query.block.drools",
-            "beginCaptures": {
-                "1": {
-                    "name": "keyword.control.query.drools"
-                },
-                "2": {
-                    "name": "entity.name.function.drools"
-                },
-                "3": {
-                    "patterns": [
-                        {
-                            "include": "#queryParen"
-                        }
-                    ]
-                }
-            },
-            "endCaptures": {
-                "1": {
-                    "name": "keyword.control.query.drools"
-                },
-                "2": {
-                    "name": "punctuation.separator.drools"
-                }
-            },
-            "patterns": [
-                {
-                    "include": "#lhsKeywords"
-                },
-                {
-                    "include": "#lhsObject"
-                },
-                {
-                    "include": "#lhsIdent"
-                },
-                {
-                    "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
-                    "name": "keyword.control.rule.drools"
-                },
-                {
-                    "match": "#[a-zA-Z$_][\\w$]*",
-                    "name": "keyword.control.rule.drools"
-                },
-                {
-                    "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
-                    "name": "keyword.control.rule.drools"
-                },
-                {
-                    "match": "\\(|\\)",
-                    "name": "punctuation.bracket.round.drools"
-                },
-                {
-                    "include": "#oopExpr"
-                },
-                {
-                    "include": "#oopConstraint"
-                },
-                {
-                    "include": "source.java"
-                }
-            ]
-        },
-        "queryParen": {
-            "begin": "\\(",
-            "end": "\\)",
+            "begin": "^\\s*query\\b",
+            "end": "^\\s*end\\b",
+            "name": "meta.query.drools",
             "captures": {
                 "0": {
-                    "name": "punctuation.bracket.round.drools"
+                    "name": "keyword.control.query.drools"
                 }
             },
-            "name": "meta.query.parameters.drools",
             "patterns": [
                 {
-                    "match": "\\b([a-zA-Z_$][\\w$]*)\\s+([a-zA-Z_$][\\w$]*)\\b",
-                    "captures": {
-                        "1": {
-                            "name": "storage.type.java"
+                    "begin": "(?<=[^\\w]query|^query)(?![^\\s])",
+                    "end": "(?<=\\)|\")",
+                    "patterns": [
+                        {
+                            "include": "#stringLiteral"
                         },
-                        "2": {
-                            "name": "variable.other.definition.drools"
+                        {
+                            "begin": "\\(",
+                            "end": "\\)",
+                            "captures": {
+                                "0": {
+                                    "name": "punctuation.bracket.round.drools"
+                                }
+                            },
+                            "patterns": [
+                                {
+                                    "begin": "(?<=\\()|(,)",
+                                    "end": "(?<=\\w)(?=\\W)",
+                                    "beginCaptures": {
+                                        "1": {
+                                            "name": "punctuation.separator.delimiter.drools"
+                                        }
+                                    },
+                                    "patterns": [
+                                        {
+                                            "match": "(?<=\\W|^)[a-zA-Z_$]\\w*\\b",
+                                            "name": "storage.type.java"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "begin": "(?<=\\w)(?=\\W)",
+                                    "end": "(?=\\)|,)",
+                                    "patterns": [
+                                        {
+                                            "match": "(?<=\\W|^)[a-zA-Z_$]\\w*(?=\\W)",
+                                            "name": "variable.parameter.drools"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "begin": "(?<=\\s|^)(?=[\\w])",
+                            "end": "(?:(?<=\\w)\\s)|(?=\\()",
+                            "patterns": [
+                                {
+                                    "match": "(?<=\\W|^)[a-zA-Z_$]\\w*(?=\\W)",
+                                    "name": "entity.name.function.drools"
+                                }
+                            ]
                         }
-                    }
+                    ]
                 },
                 {
-                    "match": ",",
-                    "name": "punctuation.separator.delimiter.drools"
+                    "begin": "(?<=\\)|\")",
+                    "end": "(?=\\bend\\b)",
+                    "patterns": [
+                        {
+                            "include": "#stringLiteral"
+                        },
+                        {
+                            "include": "#lhsKeywords"
+                        },
+                        {
+                            "include": "#lhsObject"
+                        },
+                        {
+                            "include": "#lhsIdent"
+                        },
+                        {
+                            "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
+                            "name": "keyword.control.rule.drools"
+                        },
+                        {
+                            "match": "#[a-zA-Z$_][\\w$]*",
+                            "name": "keyword.control.rule.drools"
+                        },
+                        {
+                            "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
+                            "name": "keyword.control.rule.drools"
+                        },
+                        {
+                            "match": "\\(|\\)",
+                            "name": "punctuation.bracket.round.drools"
+                        },
+                        {
+                            "include": "#oopExpr"
+                        },
+                        {
+                            "include": "#oopConstraint"
+                        },
+                        {
+                            "include": "source.java"
+                        }
+                    ]
                 }
             ]
         },
@@ -463,7 +492,7 @@
             "name": "keyword.control.lhs.drools"
         },
         "lhsObject": {
-            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:=|:))?\\s*([A-Z][\\w$]*)\\s*(\\()",
+            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:=|:))?\\s*(\\?)?([a-zA-Z][\\w$]*)\\s*(\\()",
             "captures": {
                 "1": {
                     "name": "variable.other.definition.drools"
@@ -472,9 +501,12 @@
                     "name": "keyword.operator.assignment.drools"
                 },
                 "3": {
-                    "name": "storage.type.java"
+                    "name": "keyword.operator.misc.drools"
                 },
                 "4": {
+                    "name": "storage.type.java"
+                },
+                "5": {
                     "name": "punctuation.bracket.round.drools"
                 }
             }
