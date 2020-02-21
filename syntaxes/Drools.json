@@ -305,15 +305,7 @@
                             "include": "#lhsIdent"
                         },
                         {
-                            "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
-                            "name": "keyword.control.rule.drools"
-                        },
-                        {
                             "match": "#[a-zA-Z$_][\\w$]*",
-                            "name": "keyword.control.rule.drools"
-                        },
-                        {
-                            "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
                             "name": "keyword.control.rule.drools"
                         },
                         {
@@ -451,15 +443,7 @@
                     "include": "#lhsIdent"
                 },
                 {
-                    "match": "\\b(after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
-                    "name": "keyword.control.rule.drools"
-                },
-                {
                     "match": "#[a-zA-Z$_][\\w$]*",
-                    "name": "keyword.control.rule.drools"
-                },
-                {
-                    "match": "\\b(matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|,)\\b",
                     "name": "keyword.control.rule.drools"
                 },
                 {
@@ -482,25 +466,19 @@
             ]
         },
         "lhsKeywords": {
-            "match": "\\b(exists|not|eval|forall|collect|accumulate|from|and|or)\\b",
+            "match": "\\b(exists|not|eval|forall|collect|accumulate|from|and|or|matches|not matches|contains|not contains|memberOf|not memberOf|soundslike|str|in|notin|after|before|coincides|during|includes|finishes|finishedby|meets|metby|overlaps|overlappedby|starts|startedby)\\b",
             "name": "keyword.control.lhs.drools"
         },
         "lhsObject": {
-            "match": "(?:([a-zA-Z_$][\\w$]*)\\s*(:=|:))?\\s*(\\?)?([a-zA-Z][\\w$]*)\\s*(\\()",
+            "match": "(?<![\\w\\?])(\\?)?([a-zA-Z][\\w$]*)\\s*(\\()",
             "captures": {
                 "1": {
-                    "name": "variable.other.definition.drools"
-                },
-                "2": {
-                    "name": "keyword.operator.assignment.drools"
-                },
-                "3": {
                     "name": "keyword.operator.misc.drools"
                 },
-                "4": {
+                "2": {
                     "name": "storage.type.java"
                 },
-                "5": {
+                "3": {
                     "name": "punctuation.bracket.round.drools"
                 }
             }
