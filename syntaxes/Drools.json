@@ -131,11 +131,10 @@
             "patterns": [
                 {
                     "begin": "(?<=[^\\w]function|^function)\\s*",
-                    "end": "(?<=\\w)(?=\\s)",
+                    "end": "(?<=[\\w$>])(?=\\s)",
                     "patterns": [
                         {
-                            "match": "\\b[a-zA-Z_$][\\w$]*\\b",
-                            "name": "storage.type.primitive.java"
+                            "include": "#javaType"
                         }
                     ]
                 },
@@ -207,7 +206,7 @@
                     ]
                 },
                 {
-                    "begin": "(?<=\\w)",
+                    "begin": "(?<=[\\w$>])",
                     "end": "(?=\\()",
                     "endCaptures": {
                         "0": {
@@ -220,6 +219,30 @@
                             "name": "entity.name.function.java"
                         }
                     ]
+                }
+            ]
+        },
+        "javaType": {
+            "patterns": [
+                {
+                    "include": "#javaParameterized"
+                },
+                {
+                    "match": "\\b[a-zA-Z_$.][\\w$.]*\\b",
+                    "name": "storage.type.primitive.java"
+                }
+            ]
+        },
+        "javaParameterized": {
+            "begin": "<",
+            "end": ">",
+            "patterns": [
+                {
+                    "include": "#javaParameterized"
+                },
+                {
+                    "match": "\\b[a-zA-Z_$.][\\w$.]*\\b",
+                    "name": "storage.type.primitive.java"
                 }
             ]
         },
