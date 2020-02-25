@@ -267,12 +267,15 @@
             ]
         },
         "query": {
-            "begin": "^\\s*query\\b",
-            "end": "^\\s*end\\b",
+            "begin": "^\\s*(query)\\b",
+            "end": "\\b(end)(?:\\s*(;)?|\\b)",
             "name": "meta.query.drools",
             "captures": {
-                "0": {
-                    "name": "keyword.control.query.drools"
+                "1": {
+                    "name": "keyword.control.rule.drools"
+                },
+                "2": {
+                    "name": "punctuation.terminator.drools"
                 }
             },
             "patterns": [
@@ -369,12 +372,15 @@
             ]
         },
         "declare": {
-            "begin": "^\\s*declare\\b",
-            "end": "^\\s*end\\b",
+            "begin": "^\\s*(declare)\\b",
+            "end": "\\b(end)(?:\\s*(;)?|\\b)",
             "name": "meta.declare.drools",
             "captures": {
-                "0": {
-                    "name": "keyword.control.declare.drools"
+                "1": {
+                    "name": "keyword.control.rule.drools"
+                },
+                "2": {
+                    "name": "punctuation.terminator.drools"
                 }
             },
             "patterns": [
