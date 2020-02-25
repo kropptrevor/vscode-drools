@@ -1,6 +1,6 @@
 # Drools VS Code Extension
 
-This extensions adds drools language support to VSC (.drl).
+This extensions adds drools language support to vscode (.drl).
 
 ## Features
 
@@ -8,10 +8,11 @@ See image for example .drl syntax highlighting
 
 ![Example](images/example.png)
 
-## Contributors
-
-Special thanks to https://github.com/mboyajia/drools-syntax-highlighter for the .tmLanguage file.
 ## Release Notes
+
+### 0.0.2
+
+Reworked the highlighting to be mostly dependent on context
 
 ### 0.0.1
 
