@@ -5,6 +5,12 @@
     "name": "Drools",
     "patterns": [
         {
+            "include": "#comments"
+        },
+        {
+            "include": "#stringLiteral"
+        },
+        {
             "include": "#package"
         },
         {
@@ -24,12 +30,23 @@
         },
         {
             "include": "#ruleRHS"
-        },
-        {
-            "include": "#stringLiteral"
         }
     ],
     "repository": {
+        "comments": {
+            "patterns": [
+                {
+                    "begin": "/\\*",
+                    "end": "\\*/",
+                    "name": "comment.block.drools"
+                },
+                {
+                    "begin": "//",
+                    "end": "$",
+                    "name": "comment.line.double-slash.drools"
+                }
+            ]
+        },
         "stringLiteral": {
             "begin": "\"",
             "end": "\"",
