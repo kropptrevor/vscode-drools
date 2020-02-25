@@ -11,6 +11,15 @@
             "include": "#stringLiteral"
         },
         {
+            "include": "#templateHeader"
+        },
+        {
+            "include": "#template"
+        },
+        {
+            "include": "#endTemplate"
+        },
+        {
             "include": "#package"
         },
         {
@@ -60,6 +69,70 @@
             "patterns": [
                 {
                     "match": "\\\\[\\\\\"ntbr]"
+                }
+            ]
+        },
+        "templateHeader": {
+            "begin": "^\\s*template\\s+header\\s",
+            "end": "^\\s*(end\\s+template)(?:\\s*(;)?|\\b)",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.template.drools"
+                }
+            },
+            "endCaptures": {
+                "1": {
+                    "name": "keyword.control.template.drools"
+                },
+                "2": {
+                    "name": "punctuation.terminator.drools"
+                }
+            },
+            "patterns": [
+                {
+                    "begin": "(?<=header\\s)",
+                    "end": "^\\s*$",
+                    "patterns": [
+                        {
+                            "match": "^\\s*(\\w+)(\\s*\\[\\s*\\])?\\s*$",
+                            "captures": {
+                                "1": {
+                                    "name": "variable.other.definition.drools"
+                                },
+                                "2": {
+                                    "name": "punctuation.bracket.square.drools"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "begin": "^\\s*template\\s*(?=\")",
+                    "end": "^\\s*$",
+                    "beginCaptures": {
+                        "0": {
+                            "name": "keyword.control.template.drools"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#stringLiteral"
+                        },
+                        {
+                            "match": "^\\s*(\\w+)(\\s*\\[\\s*\\])?\\s*$",
+                            "captures": {
+                                "1": {
+                                    "name": "variable.other.definition.drools"
+                                },
+                                "2": {
+                                    "name": "punctuation.bracket.square.drools"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "include": "$self"
                 }
             ]
         },
