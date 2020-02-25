@@ -23,6 +23,9 @@
             "include": "#query"
         },
         {
+            "include": "#declare"
+        },
+        {
             "include": "#ruleBeginning"
         },
         {
@@ -360,6 +363,104 @@
                         },
                         {
                             "include": "source.java"
+                        }
+                    ]
+                }
+            ]
+        },
+        "declare": {
+            "begin": "^\\s*declare\\b",
+            "end": "^\\s*end\\b",
+            "name": "meta.declare.drools",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.declare.drools"
+                }
+            },
+            "patterns": [
+                {
+                    "begin": "(?<=\\sdeclare|^declare)\\s",
+                    "end": "$|(?=end[\\s])",
+                    "patterns": [
+                        {
+                            "match": "(?<=\\s|^)enum(?=\\s)",
+                            "name": "storage.modifier.drools"
+                        },
+                        {
+                            "match": "(?<=\\s|^)extends(?=\\s)",
+                            "name": "storage.modifier.drools"
+                        },
+                        {
+                            "match": "(?<=\\s|^)[a-zA-Z$_][\\w$]*(?=\\s)",
+                            "name": "storage.type.java"
+                        }
+                    ]
+                },
+                {
+                    "begin": "(?=@)",
+                    "end": "(?<=\\))|(?<=\\w)(?=\\s)",
+                    "patterns": [
+                        {
+                            "match": "(@)([a-zA-Z$_]\\w*)(?=\\s|\\()",
+                            "captures": {
+                                "1": {
+                                    "name": "punctuation.definition.annotation.drools"
+                                },
+                                "2": {
+                                    "name": "storage.type.annotation.drools"
+                                }
+                            }
+                        },
+                        {
+                            "begin": "\\(",
+                            "end": "\\)",
+                            "captures": {
+                                "0": {
+                                    "name": "punctuation.bracket.round.drools"
+                                }
+                            },
+                            "patterns": [
+                                {
+                                    "match": "(?<=\\(|\\s)[^\\s\\)]+(?=\\)|\\s)",
+                                    "name": "string.annotation.drools"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "match": "(?<=\\s|^)([a-zA-Z$_]\\w*)\\s*(:)\\s*([a-zA-Z$_]\\w*)(?=\\W)",
+                    "captures": {
+                        "1": {
+                            "name": "variable.other.definition.drools"
+                        },
+                        "2": {
+                            "name": "punctuation.definition.drools"
+                        },
+                        "3": {
+                            "name": "storage.type.java"
+                        }
+                    }
+                },
+                {
+                    "begin": "(?<=\\s|^|,)(?=[a-zA-Z$_])",
+                    "end": ";",
+                    "endCaptures": {
+                        "0": {
+                            "name": "punctuation.terminator.drools"
+                        }
+                    },
+                    "patterns": [
+                        {
+                            "include": "#stringLiteral"
+                        },
+                        {
+                            "match": ",",
+                            "name": "punctuation.separator.delimiter.drools"
+                        },
+                        {
+                            "match": "(?<=\\s|,)[a-zA-Z$_]\\w*(?=\\s|\\(|,|;)",
+                            "name": "constant.other.enum.drools"
                         }
                     ]
                 }
