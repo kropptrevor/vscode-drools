@@ -148,7 +148,7 @@
             "end": "(?:^\\n|(?<=})\\n)",
             "beginCaptures": {
                 "1": {
-                    "name": "keyword.control.source.drools"
+                    "name": "keyword.control.function.drools"
                 }
             },
             "patterns": [
@@ -275,7 +275,7 @@
             "name": "meta.query.drools",
             "captures": {
                 "1": {
-                    "name": "keyword.control.rule.drools"
+                    "name": "keyword.control.query.drools"
                 },
                 "2": {
                     "name": "punctuation.terminator.drools"
@@ -380,7 +380,7 @@
             "name": "meta.declare.drools",
             "captures": {
                 "1": {
-                    "name": "keyword.control.rule.drools"
+                    "name": "keyword.control.declare.drools"
                 },
                 "2": {
                     "name": "punctuation.terminator.drools"
@@ -480,7 +480,7 @@
             "end": "$|;",
             "beginCaptures": {
                 "0": {
-                    "name": "keyword.control.rule.drools"
+                    "name": "keyword.control.global.drools"
                 }
             },
             "endCaptures": {
