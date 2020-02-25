@@ -26,6 +26,9 @@
             "include": "#declare"
         },
         {
+            "include": "#global"
+        },
+        {
             "include": "#ruleBeginning"
         },
         {
@@ -469,6 +472,44 @@
                             "name": "constant.other.enum.drools"
                         }
                     ]
+                }
+            ]
+        },
+        "global": {
+            "begin": "^\\s*global\\s",
+            "end": "$|;",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.rule.drools"
+                }
+            },
+            "endCaptures": {
+                "0": {
+                    "name": "punctuation.terminator.drools"
+                }
+            },
+            "patterns": [
+                {
+                    "begin": "(?<=\\s)",
+                    "end": "(?=\\s)",
+                    "patterns": [
+                        {
+                            "match": "(?:(?<=\\s)|(\\.))([a-zA-Z$_]\\w*)(?=\\.|\\s)",
+                            "captures": {
+                                "1": {
+                                    "name": "punctuation.separator.delimiter.drools"
+                                },
+                                "2": {
+                                    "name": "storage.modifier.import.java"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "begin": "(?<=\\w)(?=\\s)",
+                    "end": "$|(?=;)",
+                    "name": "storage.type.java"
                 }
             ]
         },
