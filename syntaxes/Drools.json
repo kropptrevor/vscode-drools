@@ -346,7 +346,6 @@
         "ruleName": {
             "begin": "(?<=rule\\s)",
             "end": "(?<=\")|(?:(?<=\\w)(?=[^\\w]))",
-            "name": "test",
             "patterns": [
                 {
                     "include": "#stringLiteral"
